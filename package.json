@@ -1,0 +1,43 @@
+{
+  "name": "@frantss/temporal-fns",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Date-first utilities for Temporal values",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "docs"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "default": "./dist/calendar.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "npm run build && node --import temporal-polyfill/global --test test/*.test.mjs",
+    "check": "npm run format:check && npm run typecheck && npm test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "temporal-spec": "^1.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "temporal-polyfill": "^1.0.6",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
