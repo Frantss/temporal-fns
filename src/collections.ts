@@ -21,6 +21,7 @@ import {
   timeKinds,
   step,
   weekStart,
+  temporal,
 } from './internal.js';
 import { boundary } from './boundaries.js';
 import { weekends } from './calendar-utils.js';
@@ -296,6 +297,18 @@ function sequence<T extends CalendarValue | Temporal.PlainYearMonth | Temporal.P
   while (compare(current, interval.end) <= 0) {
     result.push(current);
     if (compare(current, interval.end) === 0) break;
+    if (name === 'PlainYearMonth') {
+      const month = current as Temporal.PlainYearMonth;
+      const end = interval.end as Temporal.PlainYearMonth;
+      const remaining = (end.year - month.year) * 12 + end.month - month.month;
+      if (increment > remaining) break;
+      const index = month.month - 1 + increment;
+      current = temporal().PlainYearMonth.from({
+        year: month.year + Math.floor(index / 12),
+        month: (index % 12) + 1,
+      }) as T;
+      continue;
+    }
     if (name === 'PlainTime') {
       const clock = current as Temporal.PlainTime;
       const unitsLeft = unit === 'hour' ? 24 - clock.hour : 1440 - clock.hour * 60 - clock.minute;
@@ -304,7 +317,7 @@ function sequence<T extends CalendarValue | Temporal.PlainYearMonth | Temporal.P
     let next: T;
     try {
       next = current.add({ [`${unit}s`]: increment }) as T;
-      if (name !== 'PlainYearMonth' && unit !== 'hour' && unit !== 'minute')
+      if (unit !== 'hour' && unit !== 'minute')
         next = boundary(next as CalendarValue, unit, false, startsOn) as T;
     } catch (error) {
       if (error instanceof RangeError) break;

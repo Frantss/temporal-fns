@@ -1,0 +1,18 @@
+import './adapters.steps.js';
+import { installBindings } from './bindings.js';
+import './boundaries.steps.js';
+import './business-days.steps.js';
+import './calendar-queries.steps.js';
+import './collections.steps.js';
+import './comparisons.steps.js';
+import './contracts.steps.js';
+import './declarations.steps.js';
+import './durations.steps.js';
+import './formatting.steps.js';
+import './intervals.steps.js';
+import './parsing.steps.js';
+import './relative-descriptions.steps.js';
+import './relative-range.steps.js';
+import './sequences.steps.js';
+import './type-coverage.steps.js';
+installBindings();

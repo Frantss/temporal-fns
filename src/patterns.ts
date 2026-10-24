@@ -319,8 +319,8 @@ function read(
       captures.push(token);
       if (token === 'yyyy') return '(\\d{4,6})';
       if (token === 'a') return '(AM|PM)';
-      if (token === 'XX') return '(Z|[+-]\\d{4})';
-      if (token === 'XXX') return '(Z|[+-]\\d{2}:\\d{2})';
+      if (token === 'XX') return '(Z|[+-](?:[01]\\d|2[0-3])[0-5]\\d)';
+      if (token === 'XXX') return '(Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d)';
       return token === 'SSS' ? '(\\d{3})' : token.length === 2 ? '(\\d{2})' : '(\\d{1,2})';
     })
     .join('');

@@ -22,22 +22,37 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.test.json",
-    "test": "npm run build && node --import temporal-polyfill/global --test test/*.test.mjs",
-    "check": "npm run format:check && npm run typecheck && npm test",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "prepack": "npm run build"
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "check": "vp check --deny-warnings && npm run typecheck && npm test",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "prepack": "npm run build",
+    "test": "npm run build && vp test",
+    "test:native": "npm run build && TEMPORAL_TEST_NATIVE=1 vp test",
+    "test:watch": "npm run build && vp test watch",
+    "lint": "vp lint --deny-warnings"
   },
   "dependencies": {
     "temporal-spec": "^1.0.1"
   },
   "devDependencies": {
-    "prettier": "^3.9.10",
+    "@cucumber/cucumber": "^13.0.0",
+    "@cucumber/gherkin": "42.0.1",
+    "@cucumber/messages": "34.2.1",
+    "@lotun/vitest-cucumber": "0.5.4",
+    "@types/node": "^24.19.2",
     "temporal-polyfill": "^1.0.6",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "typescript-compiler": "npm:typescript@6.0.3",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
+    "vite-plus": "1.4.0",
+    "vitest": "5.0.5"
   },
   "engines": {
     "node": ">=20"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
+    "vitest": "5.0.5"
   }
 }

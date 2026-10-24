@@ -98,16 +98,11 @@ Arithmetic, field access, ISO parsing, rounding, and ordinary zone conversion us
 
 ## Development
 
+Use Node 24.13.0 from `.node-version`. Vite+ provides Vitest, Oxlint, and Oxfmt through the project-local `vp` command.
+
 ```sh
 npm ci
 npm run check
 ```
 
-`check` verifies formatting, type declarations and invalid-call type tests, builds the package, and runs runtime tests with `temporal-polyfill/global`. On a host with native Temporal, the polyfill leaves the native implementation in place. To run the built tests directly against native Temporal:
-
-```sh
-npm run build
-node --test test/*.test.mjs
-```
-
-The suite covers all exports and all eight types, including DST gaps/repeated hours, skipped midnight, range boundaries, custom weekends, parsing failures, tuple narrowing, and host-local widget dates.
+`check` runs Vite+ formatting, lint, and type checks, type-checks the source and tests, builds the package, and runs the [executable Gherkin and TypeScript suites](test/README.md). The official Cucumber runtime executes all 1,621 formulated cases through Vitest, with TypeScript step bindings. Separate declaration, regression, and inventory checks bring the total to 1,722. `npm test` runs them with the Temporal polyfill; `npm run test:native` uses native Temporal, and `npm run test:watch` starts watch mode. See the suite's README for execution details.

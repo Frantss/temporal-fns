@@ -8,12 +8,16 @@ export type YearMonthValue = CalendarValue | Temporal.PlainYearMonth;
 export type QuarterValue = YearMonthValue | Temporal.PlainMonthDay;
 export type OrderedValue = YearMonthValue | Temporal.PlainTime | Temporal.Instant;
 export type ParseReference =
-  YearMonthValue | Temporal.PlainTime | Temporal.PlainMonthDay | Temporal.Instant;
+  | YearMonthValue
+  | Temporal.PlainTime
+  | Temporal.PlainMonthDay
+  | Temporal.Instant;
 export type Formattable = ParseReference;
 export type TemporalValue = Formattable | Temporal.Duration;
 export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type TryResult<T, E extends Error = Error> =
-  readonly [error: null, result: T] | readonly [error: E, result: null];
+  | readonly [error: null, result: T]
+  | readonly [error: E, result: null];
 export interface WeekOptions {
   weekStartsOn?: Weekday;
 }

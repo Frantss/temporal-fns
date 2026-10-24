@@ -31,13 +31,17 @@ type YearMonthValue = CalendarValue | Temporal.PlainYearMonth;
 type QuarterValue = YearMonthValue | Temporal.PlainMonthDay;
 type OrderedValue = YearMonthValue | Temporal.PlainTime | Temporal.Instant;
 type ParseReference =
-  YearMonthValue | Temporal.PlainTime | Temporal.PlainMonthDay | Temporal.Instant;
+  | YearMonthValue
+  | Temporal.PlainTime
+  | Temporal.PlainMonthDay
+  | Temporal.Instant;
 type Formattable = ParseReference;
 type TemporalValue = Formattable | Temporal.Duration;
 type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 type TryResult<T, E extends Error = Error> =
-  readonly [error: null, result: T] | readonly [error: E, result: null];
+  | readonly [error: null, result: T]
+  | readonly [error: E, result: null];
 
 interface WeekOptions {
   weekStartsOn?: Weekday;
@@ -437,9 +441,7 @@ An application that needs only the calendar date can call `fromCalendarDate(valu
 
 The package exports all functions above. Relative and duration phrases initially support `en-US`; token text labels use host `Intl` locale data. ISO calendars, parser references, positive interval steps, and widget adapter semantics follow the rules in this document.
 
-Runtime checks cover all exports on native Temporal and the polyfill, including DST transitions and Temporal range boundaries. Compile-time checks verify preserved return types, tuple narrowing, required zone options, and rejection of mixed-kind arguments. Run `npm run check` to repeat formatting, type, build, and polyfill/native-host checks.
-
-The repository's `test/api-contract.test.mjs` checks supported and excluded kinds for each family, all week-numbering configurations, and zoned business arithmetic against day-by-day counting. `test/review-regressions.test.mjs` preserves reproductions for the implementation review findings.
+Run `npm run check` to verify formatting, type-check the source, build the package, and run the [behavior test suite](../test/README.md). The tests bind the [Gherkin specifications](behavior/README.md) to runtime assertions and declaration checks. The suite's README records execution details and current implementation discrepancies.
 
 ## References
 
