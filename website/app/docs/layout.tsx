@@ -1,21 +1,13 @@
 import type { ReactNode } from 'react';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { DocsBrand, DocsLayout } from '@frantss/fumadocs-theme';
 import { source } from '../../lib/source';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
       tree={source.pageTree}
-      containerProps={{ className: 'reference-frame' }}
       nav={{
-        title: (
-          <>
-            <span className="reference-mark" aria-hidden="true">
-              TF
-            </span>
-            <span>temporal-fns</span>
-          </>
-        ),
+        title: <DocsBrand mark="TF">temporal-fns</DocsBrand>,
       }}
       githubUrl="https://github.com/Frantss/temporal-fns"
       links={[

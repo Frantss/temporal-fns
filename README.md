@@ -61,4 +61,4 @@ npm run check
 
 See the [test guide](test/README.md) for the executable Gherkin specifications and native Temporal testing.
 
-Run the Fumadocs site with `npm run docs:dev` after [installing its dependencies](website/README.md). Build static files with `npm run docs:build`.
+Run the Fumadocs site with `npm run docs:dev`. Build static files with `npm run docs:build`. See the [site guide](website/README.md) and the reusable [@frantss/fumadocs-theme package](https://github.com/Frantss/fumadocs-theme).

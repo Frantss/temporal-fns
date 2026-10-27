@@ -5,7 +5,7 @@ Fumadocs with Next.js. The canonical API pages live in [content/docs/api](conten
 From the repository root:
 
 ```sh
-npm ci --prefix website
+npm ci
 npm run docs:dev
 ```
 
@@ -19,3 +19,5 @@ npm run docs:build
 The build exports the site and its search index to `website/out/`. Serve that directory on a static host, including its `_next/` assets. No server or search service is required.
 
 Edit the Markdown directly; changes appear in development. Update [api/meta.json](content/docs/api/meta.json) when adding or renaming an API page. Behavior links point to the Gherkin source on GitHub.
+
+The app uses [@frantss/fumadocs-theme](https://www.npmjs.com/package/@frantss/fumadocs-theme) from npm for styles and layout components. The repository root lockfile covers the documentation workspace.

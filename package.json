@@ -41,9 +41,9 @@
     "test:native": "npm run build && TEMPORAL_TEST_NATIVE=1 vp test",
     "test:watch": "npm run build && vp test watch",
     "lint": "vp lint --deny-warnings",
-    "docs:dev": "npm --prefix website run dev",
-    "docs:build": "npm --prefix website run build",
-    "docs:typecheck": "npm --prefix website run typecheck"
+    "docs:dev": "npm run dev --workspace temporal-fns-docs",
+    "docs:build": "npm run build --workspace temporal-fns-docs",
+    "docs:typecheck": "npm run typecheck --workspace temporal-fns-docs"
   },
   "dependencies": {
     "temporal-spec": "^1.0.1"
@@ -67,5 +67,8 @@
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
     "vitest": "5.0.5"
-  }
+  },
+  "workspaces": [
+    "website"
+  ]
 }
