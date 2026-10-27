@@ -1,9 +1,20 @@
 {
-  "name": "@frantss/temporal-fns",
+  "name": "@helpy/temporal-fns",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "Date-first utilities for Temporal values",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frantss/temporal-fns.git"
+  },
+  "homepage": "https://github.com/Frantss/temporal-fns#readme",
+  "bugs": {
+    "url": "https://github.com/Frantss/temporal-fns/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "sideEffects": false,
   "files": [
     "dist",

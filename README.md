@@ -2,11 +2,17 @@
 
 Date-fns-style utilities for the Temporal API.
 
-> **Experimental.** The API and behavior may change. The package is currently private.
+> **Experimental.** The API and behavior may change.
 
 ESM with TypeScript declarations and tree-shakable named imports.
 
 The full API, including `/calendar`, bundles to approximately **23.5 kB minified (8.6 kB gzipped)** with Rolldown 1.2.15, excluding any Temporal polyfill.
+
+## Install
+
+```sh
+npm install @helpy/temporal-fns
+```
 
 ## Usage
 
@@ -14,7 +20,7 @@ Requires a global `Temporal`. If your runtime lacks it, install `temporal-polyfi
 
 ```ts
 import 'temporal-polyfill/global'; // Only needed when Temporal is unavailable globally.
-import { addBusinessDays, format, tryParse } from '@frantss/temporal-fns';
+import { addBusinessDays, format, tryParse } from '@helpy/temporal-fns';
 
 const reference = Temporal.PlainDate.from('2026-10-22');
 const nextWorkingDate = addBusinessDays(reference, 1, { weekendDays: [5, 6] });
@@ -32,7 +38,7 @@ if (error === null) {
 - Relative descriptions and duration labels support `en-US` only. Token text uses the host's `Intl` locale data.
 - `tryParse` and `tryParseDuration` return `[null, result]` or `[error, null]`. Invalid patterns, options, and incompatible inputs still throw.
 
-Browse the [public exports](src/index.ts) for the current API. Calendar-widget adapters use the `@frantss/temporal-fns/calendar` entry point.
+Browse the [public exports](src/index.ts) for the current API. Calendar-widget adapters use the `@helpy/temporal-fns/calendar` entry point.
 
 ## Development
 
