@@ -2,7 +2,7 @@
 title: 'Types and options'
 ---
 
-All types below are exported from `@helpy/temporal-fns`. Import them with `import type`. The exported `Temporal` namespace comes from `temporal-spec` and supplies types only; it does not install a runtime.
+All types below are exported from `@frantss/temporal-fns`. Import them with `import type`. The exported `Temporal` namespace comes from `temporal-spec` and supplies types only; it does not install a runtime.
 
 ## TypeScript setup
 
@@ -29,7 +29,7 @@ These unions describe available information, not permission to mix kinds within 
 Behavior: [supported and rejected kinds](https://github.com/Frantss/temporal-fns/blob/main/test/features/type-coverage.feature), [declaration constraints](https://github.com/Frantss/temporal-fns/blob/main/test/features/declarations.feature).
 
 ```ts
-import type { CalendarValue, Formattable, TemporalValue } from '@helpy/temporal-fns';
+import type { CalendarValue, Formattable, TemporalValue } from '@frantss/temporal-fns';
 
 const date: CalendarValue = Temporal.PlainDate.from('2026-10-23');
 const month: Formattable = Temporal.PlainYearMonth.from('2026-10');
@@ -49,8 +49,8 @@ duration.toString(); // => 'PT1H'
 Behavior: [interval validity](https://github.com/Frantss/temporal-fns/blob/main/test/features/intervals.feature), [tuple narrowing and readonly declarations](https://github.com/Frantss/temporal-fns/blob/main/test/features/declarations.feature#L79).
 
 ```ts
-import { isWithinInterval, tryParse } from '@helpy/temporal-fns';
-import type { Interval, Temporal as TemporalTypes, TryResult } from '@helpy/temporal-fns';
+import { isWithinInterval, tryParse } from '@frantss/temporal-fns';
+import type { Interval, Temporal as TemporalTypes, TryResult } from '@frantss/temporal-fns';
 
 const interval: Interval<TemporalTypes.PlainDate> = {
   start: Temporal.PlainDate.from('2026-10-01'),
@@ -87,8 +87,8 @@ failure[1]; // => null
 Behavior: [week rules](https://github.com/Frantss/temporal-fns/blob/main/test/features/calendar-queries.feature), [weekend configuration](https://github.com/Frantss/temporal-fns/blob/main/test/features/business-days.feature), [step validation](https://github.com/Frantss/temporal-fns/blob/main/test/features/sequences.feature#L167).
 
 ```ts
-import { addBusinessDays, getWeek, getWeekYear } from '@helpy/temporal-fns';
-import type { BusinessDayOptions, WeekNumberOptions } from '@helpy/temporal-fns';
+import { addBusinessDays, getWeek, getWeekYear } from '@frantss/temporal-fns';
+import type { BusinessDayOptions, WeekNumberOptions } from '@frantss/temporal-fns';
 
 const isoWeek: WeekNumberOptions = { weekStartsOn: 1, firstWeekContainsDate: 4 };
 const date = Temporal.PlainDate.from('2021-01-01');
@@ -113,8 +113,8 @@ The exported option interfaces are building blocks. Function overloads require o
 Behavior: [viewing zones](https://github.com/Frantss/temporal-fns/blob/main/test/features/formatting.feature#L99), [parsing zones and disambiguation](https://github.com/Frantss/temporal-fns/blob/main/test/features/parsing.feature#L169), [required context in TypeScript](https://github.com/Frantss/temporal-fns/blob/main/test/features/declarations.feature#L27).
 
 ```ts
-import { format, parse } from '@helpy/temporal-fns';
-import type { FormatOptions, ParseOptions, RequiredZoneOptions } from '@helpy/temporal-fns';
+import { format, parse } from '@frantss/temporal-fns';
+import type { FormatOptions, ParseOptions, RequiredZoneOptions } from '@frantss/temporal-fns';
 
 const utc: FormatOptions & RequiredZoneOptions = { timeZone: 'UTC', locale: 'en-US' };
 format(Temporal.Instant.from('2026-10-24T01:00Z'), 'HH:mm', utc); // => '01:00'
@@ -137,8 +137,8 @@ Strict distance units are singular `second`, `minute`, `hour`, `day`, `month`, o
 Behavior: [relative options](https://github.com/Frantss/temporal-fns/blob/main/test/features/relative-descriptions.feature), [duration selection and validation](https://github.com/Frantss/temporal-fns/blob/main/test/features/durations.feature).
 
 ```ts
-import { formatDistanceStrict, formatDuration } from '@helpy/temporal-fns';
-import type { DurationFormatOptions, StrictDistanceOptions } from '@helpy/temporal-fns';
+import { formatDistanceStrict, formatDuration } from '@frantss/temporal-fns';
+import type { DurationFormatOptions, StrictDistanceOptions } from '@frantss/temporal-fns';
 
 const strict: Omit<StrictDistanceOptions, 'timeZone'> = {
   unit: 'minute',
@@ -159,8 +159,8 @@ Related: [value types](#value-types), [interval and result types](#interval-and-
 Behavior: [imports do not install Temporal](https://github.com/Frantss/temporal-fns/blob/main/test/features/contracts.feature#L5).
 
 ```ts
-import { format } from '@helpy/temporal-fns';
-import type { Temporal as TemporalTypes } from '@helpy/temporal-fns';
+import { format } from '@frantss/temporal-fns';
+import type { Temporal as TemporalTypes } from '@frantss/temporal-fns';
 
 const date: TemporalTypes.PlainDate = Temporal.PlainDate.from('2026-10-23');
 const time: TemporalTypes.PlainTime = Temporal.PlainTime.from('12:30');

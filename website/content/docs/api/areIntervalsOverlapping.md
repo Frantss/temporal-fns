@@ -11,7 +11,7 @@ Check whether intervals overlap. `inclusive` defaults to `false`, so touching en
 A point interval strictly inside another interval overlaps by default. A point at an endpoint, or two equal point intervals, requires `inclusive: true`. The result is symmetric.
 
 ```ts
-import { areIntervalsOverlapping } from '@helpy/temporal-fns';
+import { areIntervalsOverlapping } from '@frantss/temporal-fns';
 
 const first = {
   start: Temporal.PlainTime.from('10:00'),

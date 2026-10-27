@@ -9,7 +9,7 @@ title: 'getQuarter'
 Return the ISO quarter of the represented month. Accepts calendar values, `PlainYearMonth`, and `PlainMonthDay`. Quarters start in January, April, July, and October.
 
 ```ts
-import { getQuarter } from '@helpy/temporal-fns';
+import { getQuarter } from '@frantss/temporal-fns';
 
 getQuarter(Temporal.PlainDate.from('2026-03-31')); // => 1
 getQuarter(Temporal.PlainYearMonth.from('2026-04')); // => 2

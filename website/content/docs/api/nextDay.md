@@ -9,7 +9,7 @@ title: 'nextDay'
 Move strictly forward to the next occurrence of the requested weekday. If the input already has that weekday, move to the following week. Preserve clock fields with native calendar arithmetic. If an entire weekday occurrence was skipped in a zone, continue to a later occurrence. An unrepresentable result throws.
 
 ```ts
-import { nextDay } from '@helpy/temporal-fns';
+import { nextDay } from '@frantss/temporal-fns';
 
 const thursday = Temporal.PlainDate.from('2026-10-22');
 nextDay(thursday, 5).toString(); // => '2026-10-23'

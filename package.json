@@ -1,5 +1,5 @@
 {
-  "name": "@helpy/temporal-fns",
+  "name": "@frantss/temporal-fns",
   "version": "0.1.0",
   "type": "module",
   "description": "Date-first utilities for Temporal values",

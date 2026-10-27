@@ -43,7 +43,7 @@ registerScenario<ExampleRows['CON-001']>('CON-001', () => {
             '--input-type=module',
             '-e',
             code +
-              "await import('@helpy/temporal-fns');await import('@helpy/temporal-fns/calendar');console.log(JSON.stringify({absent:typeof Reflect.get(globalThis,'Temporal')==='undefined'}));",
+              "await import('@frantss/temporal-fns');await import('@frantss/temporal-fns/calendar');console.log(JSON.stringify({absent:typeof Reflect.get(globalThis,'Temporal')==='undefined'}));",
           ],
           { encoding: 'utf8' },
         );

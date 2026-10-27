@@ -9,7 +9,7 @@ title: 'getWeeksInMonth'
 Count the week rows that intersect the represented month. Accepts calendar values and `PlainYearMonth` with optional `weekStartsOn`. This is a grid row count, not a count of full weeks; it also works for partial months at Temporal's range limits.
 
 ```ts
-import { getWeeksInMonth } from '@helpy/temporal-fns';
+import { getWeeksInMonth } from '@frantss/temporal-fns';
 
 getWeeksInMonth(Temporal.PlainYearMonth.from('2026-02')); // => 4
 getWeeksInMonth(Temporal.PlainYearMonth.from('2026-05')); // => 6

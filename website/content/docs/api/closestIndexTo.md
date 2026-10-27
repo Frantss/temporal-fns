@@ -9,7 +9,7 @@ title: 'closestIndexTo'
 Return the zero-based index selected by [closestTo](./closestTo.md), or `undefined` for an empty array. Tied distances choose the first index.
 
 ```ts
-import { closestIndexTo } from '@helpy/temporal-fns';
+import { closestIndexTo } from '@frantss/temporal-fns';
 
 const target = Temporal.PlainYearMonth.from('2026-11');
 closestIndexTo(target, [

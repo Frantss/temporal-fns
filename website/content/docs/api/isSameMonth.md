@@ -9,7 +9,7 @@ title: 'isSameMonth'
 Check whether the year and month match. `PlainYearMonth` input remains month-only; hidden reference days do not affect equality.
 
 ```ts
-import { isSameMonth } from '@helpy/temporal-fns';
+import { isSameMonth } from '@frantss/temporal-fns';
 
 isSameMonth(Temporal.PlainDate.from('2026-10-01'), Temporal.PlainDate.from('2026-10-31')); // => true
 isSameMonth(Temporal.PlainYearMonth.from('2026-10'), Temporal.PlainYearMonth.from('2026-11')); // => false

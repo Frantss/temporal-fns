@@ -9,7 +9,7 @@ title: 'isSameISOWeek'
 Check whether two values share the same Monday-based ISO week. Matching week numbers from different week-years do not imply equality. Only applicable zone context is accepted as an option.
 
 ```ts
-import { isSameISOWeek } from '@helpy/temporal-fns';
+import { isSameISOWeek } from '@frantss/temporal-fns';
 
 isSameISOWeek(Temporal.PlainDate.from('2026-10-19'), Temporal.PlainDate.from('2026-10-25')); // => true
 isSameISOWeek(Temporal.PlainDate.from('2026-10-18'), Temporal.PlainDate.from('2026-10-19')); // => false

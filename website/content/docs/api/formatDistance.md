@@ -11,7 +11,7 @@ Describe `value` relative to `base` with approximate phrases such as `about 1 ho
 Phrase thresholds are specified by the linked behaviors, including transitions at 30/90 seconds, 45/90 minutes, 24/42 hours, and 30/45/60/365 days. Longer month/year counts use calendar totals.
 
 ```ts
-import { formatDistance } from '@helpy/temporal-fns';
+import { formatDistance } from '@frantss/temporal-fns';
 
 const base = Temporal.PlainDateTime.from('2026-01-01T00:00');
 formatDistance(base.add({ minutes: 45 }), base); // => 'about 1 hour'

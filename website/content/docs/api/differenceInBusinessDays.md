@@ -11,7 +11,7 @@ Count working dates in the lower-inclusive, upper-exclusive calendar-date range.
 Inputs must have the same kind. Zoned pairs use [calendar comparison zones](./index.md#calendar-comparison-zones), including an optional common `timeZone`. Plain inputs reject zone context. Skipped zoned dates are not counted.
 
 ```ts
-import { differenceInBusinessDays } from '@helpy/temporal-fns';
+import { differenceInBusinessDays } from '@frantss/temporal-fns';
 
 const friday = Temporal.PlainDate.from('2026-10-23');
 const monday = Temporal.PlainDate.from('2026-10-26');

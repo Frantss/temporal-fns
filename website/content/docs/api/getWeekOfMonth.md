@@ -9,7 +9,7 @@ title: 'getWeekOfMonth'
 Return the 1-based row containing the date in a month calendar grid. The first row is the week intersecting the first of the month, even if that week began in the previous month. Accepts `weekStartsOn`; week-year anchor options do not apply.
 
 ```ts
-import { getWeekOfMonth } from '@helpy/temporal-fns';
+import { getWeekOfMonth } from '@frantss/temporal-fns';
 
 getWeekOfMonth(Temporal.PlainDate.from('2026-05-01')); // => 1
 getWeekOfMonth(Temporal.PlainDate.from('2026-05-03')); // => 2

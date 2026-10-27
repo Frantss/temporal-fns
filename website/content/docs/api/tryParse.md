@@ -11,7 +11,7 @@ Use the same parsing rules as [parse](./parse.md), with a readonly error-first t
 Invalid patterns, unsupported fields, invalid options, missing zones, incompatible references, and non-string input still throw. The tuple only captures input parsing failures.
 
 ```ts
-import { tryParse } from '@helpy/temporal-fns';
+import { tryParse } from '@frantss/temporal-fns';
 
 const reference = Temporal.PlainDate.from('2000-01-01');
 const [error, result] = tryParse('2024-02-29', 'yyyy-MM-dd', reference);

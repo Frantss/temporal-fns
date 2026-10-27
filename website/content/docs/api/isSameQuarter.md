@@ -9,7 +9,7 @@ title: 'isSameQuarter'
 Check whether values fall in the same three-month ISO quarter of the same year. Accepts `PlainYearMonth`, but not `PlainMonthDay` because equality needs a year.
 
 ```ts
-import { isSameQuarter } from '@helpy/temporal-fns';
+import { isSameQuarter } from '@frantss/temporal-fns';
 
 isSameQuarter(Temporal.PlainYearMonth.from('2026-10'), Temporal.PlainYearMonth.from('2026-12')); // => true
 isSameQuarter(Temporal.PlainDate.from('2026-09-30'), Temporal.PlainDate.from('2026-10-01')); // => false

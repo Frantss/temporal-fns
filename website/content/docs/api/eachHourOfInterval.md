@@ -9,7 +9,7 @@ title: 'eachHourOfInterval'
 Enumerate hour starts for `PlainTime`, `PlainDateTime`, or `ZonedDateTime` endpoints. Supports `step`. The first result floors the start to an hour. Zoned steps use elapsed hours, skipping a spring gap and retaining both occurrences of a repeated hour. PlainTime sequences stop before midnight wrapping; use dated values for overnight intervals.
 
 ```ts
-import { eachHourOfInterval } from '@helpy/temporal-fns';
+import { eachHourOfInterval } from '@frantss/temporal-fns';
 
 eachHourOfInterval(
   {

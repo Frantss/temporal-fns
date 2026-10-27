@@ -9,7 +9,7 @@ title: 'endOfQuarter'
 Find the last date or final nanosecond of the containing quarter. For `PlainYearMonth`, return its quarter's last month.
 
 ```ts
-import { endOfQuarter } from '@helpy/temporal-fns';
+import { endOfQuarter } from '@frantss/temporal-fns';
 
 endOfQuarter(Temporal.PlainDate.from('2024-02-29')).toString(); // => '2024-03-31'
 endOfQuarter(Temporal.PlainYearMonth.from('2026-10')).toString(); // => '2026-12'

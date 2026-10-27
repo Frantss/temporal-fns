@@ -9,7 +9,7 @@ title: 'endOfMonth'
 Find the last date or final nanosecond of the containing month, including leap-day rules. Does not accept `PlainYearMonth`.
 
 ```ts
-import { endOfMonth } from '@helpy/temporal-fns';
+import { endOfMonth } from '@frantss/temporal-fns';
 
 endOfMonth(Temporal.PlainDate.from('2024-02-01')).toString(); // => '2024-02-29'
 endOfMonth(Temporal.PlainDate.from('2025-02-01')).toString(); // => '2025-02-28'

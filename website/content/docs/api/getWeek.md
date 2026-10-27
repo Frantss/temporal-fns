@@ -9,7 +9,7 @@ title: 'getWeek'
 Return the 1-based week number within the week-year selected by `weekStartsOn` and `firstWeekContainsDate`. Week 1 contains January's `firstWeekContainsDate`. Use both options `{ weekStartsOn: 1, firstWeekContainsDate: 4 }` for ISO numbering.
 
 ```ts
-import { getWeek } from '@helpy/temporal-fns';
+import { getWeek } from '@frantss/temporal-fns';
 
 getWeek(Temporal.PlainDate.from('2025-12-31')); // => 1
 getWeek(Temporal.PlainDate.from('2026-01-04')); // => 2

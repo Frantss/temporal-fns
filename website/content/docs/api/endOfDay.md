@@ -9,7 +9,7 @@ title: 'endOfDay'
 Find the last nanosecond of the day. Accepts `PlainTime`, `PlainDateTime`, and `ZonedDateTime`; `PlainDate` is not accepted. Clock-only input returns `23:59:59.999999999`.
 
 ```ts
-import { endOfDay } from '@helpy/temporal-fns';
+import { endOfDay } from '@frantss/temporal-fns';
 
 endOfDay(Temporal.PlainTime.from('12:30')).toString(); // => '23:59:59.999999999'
 endOfDay(Temporal.PlainDateTime.from('2024-02-29T12:30')).toString(); // => '2024-02-29T23:59:59.999999999'

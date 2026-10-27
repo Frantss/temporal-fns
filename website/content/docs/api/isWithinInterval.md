@@ -9,7 +9,7 @@ title: 'isWithinInterval'
 Check membership in a closed interval, including both endpoints. Equal endpoints form a valid point interval.
 
 ```ts
-import { isWithinInterval } from '@helpy/temporal-fns';
+import { isWithinInterval } from '@frantss/temporal-fns';
 
 const interval = {
   start: Temporal.PlainTime.from('10:00'),

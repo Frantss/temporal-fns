@@ -97,6 +97,6 @@ Where supported, `step` defaults to `1` and must be a positive safe integer. Ste
 
 ## Calendar widget adapters
 
-Import these functions from `@helpy/temporal-fns/calendar`. They exchange displayed calendar fields with `Date`-based widgets using the host's local time zone. They copy fields rather than preserve the original instant.
+Import these functions from `@frantss/temporal-fns/calendar`. They exchange displayed calendar fields with `Date`-based widgets using the host's local time zone. They copy fields rather than preserve the original instant.
 
 A global `Temporal` is still required. These adapters do not accept options. See the [shared contracts](./index.md#shared-contracts).

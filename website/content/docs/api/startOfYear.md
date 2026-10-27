@@ -9,7 +9,7 @@ title: 'startOfYear'
 Find January 1 of the containing year. Also accepts `PlainYearMonth` and returns January of that year.
 
 ```ts
-import { startOfYear } from '@helpy/temporal-fns';
+import { startOfYear } from '@frantss/temporal-fns';
 
 startOfYear(Temporal.PlainDate.from('2024-02-29')).toString(); // => '2024-01-01'
 startOfYear(Temporal.PlainYearMonth.from('2026-10')).toString(); // => '2026-01'

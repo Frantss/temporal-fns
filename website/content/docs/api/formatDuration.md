@@ -11,7 +11,7 @@ Render nonzero components, from years through nanoseconds by default. `format` s
 A negative duration gets one leading minus sign. When `zero` is omitted or `false` and no selected component is nonzero, output is `0` followed by the last selected plural unit; the default is `0 nanoseconds`. With `zero: true`, every selected component appears, including when all are zero.
 
 ```ts
-import { formatDuration } from '@helpy/temporal-fns';
+import { formatDuration } from '@frantss/temporal-fns';
 
 const duration = Temporal.Duration.from({ hours: 25, minutes: 30 });
 formatDuration(duration); // => '25 hours 30 minutes'

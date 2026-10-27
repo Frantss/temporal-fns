@@ -9,7 +9,7 @@ title: 'eachDayOfInterval'
 Enumerate day starts for `PlainDate`, `PlainDateTime`, or `ZonedDateTime` endpoints. Supports `step`. Zoned days follow local calendar dates, honor skipped midnight, and omit dates that never occurred.
 
 ```ts
-import { eachDayOfInterval } from '@helpy/temporal-fns';
+import { eachDayOfInterval } from '@frantss/temporal-fns';
 
 const interval = {
   start: Temporal.PlainDate.from('2026-10-23'),

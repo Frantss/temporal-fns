@@ -9,7 +9,7 @@ title: 'eachWeekendOfInterval'
 Enumerate containing day starts whose weekdays appear in `weekendDays`, for `PlainDate`, `PlainDateTime`, or `ZonedDateTime` endpoints. Defaults to Saturday and Sunday. Accepts `weekendDays` only; there is no `step` option. No matching dates returns `[]`.
 
 ```ts
-import { eachWeekendOfInterval } from '@helpy/temporal-fns';
+import { eachWeekendOfInterval } from '@frantss/temporal-fns';
 
 const interval = {
   start: Temporal.PlainDate.from('2026-10-23'),

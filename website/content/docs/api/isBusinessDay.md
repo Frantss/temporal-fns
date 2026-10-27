@@ -9,7 +9,7 @@ title: 'isBusinessDay'
 Check whether the value's own local weekday is absent from `weekendDays`. It is the exact inverse of [isWeekend](./isWeekend.md) under the same valid configuration.
 
 ```ts
-import { isBusinessDay } from '@helpy/temporal-fns';
+import { isBusinessDay } from '@frantss/temporal-fns';
 
 isBusinessDay(Temporal.PlainDate.from('2026-10-23')); // => true
 isBusinessDay(Temporal.PlainDate.from('2026-10-24')); // => false

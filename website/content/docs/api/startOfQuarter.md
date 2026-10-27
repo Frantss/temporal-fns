@@ -9,7 +9,7 @@ title: 'startOfQuarter'
 Find the first date of the containing ISO quarter (January, April, July, or October). Also accepts `PlainYearMonth` and returns its quarter's first month without adding day precision.
 
 ```ts
-import { startOfQuarter } from '@helpy/temporal-fns';
+import { startOfQuarter } from '@frantss/temporal-fns';
 
 startOfQuarter(Temporal.PlainDate.from('2026-05-17')).toString(); // => '2026-04-01'
 startOfQuarter(Temporal.PlainYearMonth.from('2026-12')).toString(); // => '2026-10'

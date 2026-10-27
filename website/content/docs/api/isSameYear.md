@@ -9,7 +9,7 @@ title: 'isSameYear'
 Check whether the represented calendar year matches. Also accepts `PlainYearMonth`.
 
 ```ts
-import { isSameYear } from '@helpy/temporal-fns';
+import { isSameYear } from '@frantss/temporal-fns';
 
 isSameYear(Temporal.PlainDate.from('2026-01-01'), Temporal.PlainDate.from('2026-12-31')); // => true
 isSameYear(Temporal.PlainYearMonth.from('2026-01'), Temporal.PlainYearMonth.from('2026-12')); // => true

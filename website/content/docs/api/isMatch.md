@@ -9,7 +9,7 @@ title: 'isMatch'
 Check whether the complete input can be parsed, including date validity, using the same required reference and options as [parse](./parse.md). Invalid input returns `false`. Invalid configuration or non-string input still throws.
 
 ```ts
-import { isMatch } from '@helpy/temporal-fns';
+import { isMatch } from '@frantss/temporal-fns';
 
 const reference = Temporal.PlainDate.from('2000-01-01');
 isMatch('2024-02-29', 'yyyy-MM-dd', reference); // => true

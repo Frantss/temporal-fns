@@ -9,7 +9,7 @@ title: 'eachWeekOfInterval'
 Enumerate starts of containing weeks for `PlainDate`, `PlainDateTime`, or `ZonedDateTime` endpoints. Supports `step` and `weekStartsOn` (default Sunday, `0`). Zoned steps follow local calendar weeks across offset changes.
 
 ```ts
-import { eachWeekOfInterval } from '@helpy/temporal-fns';
+import { eachWeekOfInterval } from '@frantss/temporal-fns';
 
 const interval = {
   start: Temporal.PlainDate.from('2026-10-23'),

@@ -9,7 +9,7 @@ title: 'subBusinessDays'
 Move backward by `amount` working dates, with the same rules as [addBusinessDays](./addBusinessDays.md). A negative amount moves forward. Amounts must be safe integers; zero returns the original object after validating configuration.
 
 ```ts
-import { subBusinessDays } from '@helpy/temporal-fns';
+import { subBusinessDays } from '@frantss/temporal-fns';
 
 const monday = Temporal.PlainDate.from('2026-10-26');
 subBusinessDays(monday, 1).toString(); // => '2026-10-23'

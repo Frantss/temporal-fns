@@ -9,7 +9,7 @@ title: 'clamp'
 Keep `value` inside the closed interval. Return the original start object when below it, the original end object when above it, or the original input when already inside, including equal endpoints.
 
 ```ts
-import { clamp } from '@helpy/temporal-fns';
+import { clamp } from '@frantss/temporal-fns';
 
 const start = Temporal.PlainDate.from('2026-10-02');
 const end = Temporal.PlainDate.from('2026-10-04');

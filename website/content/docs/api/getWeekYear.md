@@ -9,7 +9,7 @@ title: 'getWeekYear'
 Return the year that owns the selected week. This may differ from `value.year` near New Year. Use the same `weekStartsOn` and `firstWeekContainsDate` options as [getWeek](./getWeek.md).
 
 ```ts
-import { getWeekYear } from '@helpy/temporal-fns';
+import { getWeekYear } from '@frantss/temporal-fns';
 
 getWeekYear(Temporal.PlainDate.from('2025-12-31')); // => 2026
 getWeekYear(Temporal.PlainDate.from('2021-01-01'), {

@@ -11,7 +11,7 @@ Read a complete input string into a Temporal value. The reference is required. U
 Input mismatch, impossible dates, and clock overflow throw `RangeError`. Input is not trimmed. `Instant` references require `timeZone`; zoned references use their own zone and reject a zone override. `disambiguation` defaults to `compatible` and also accepts `earlier`, `later`, or `reject`. An explicit parsed offset determines the instant, then a zoned result is viewed in the reference's zone.
 
 ```ts
-import { parse } from '@helpy/temporal-fns';
+import { parse } from '@frantss/temporal-fns';
 
 const reference = Temporal.PlainDateTime.from('2000-07-19T21:34:56.123456789');
 parse('02/29/2024', 'MM/dd/yyyy', reference).toString(); // => '2024-02-29T00:00:00'

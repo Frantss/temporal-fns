@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       }}
       githubUrl="https://github.com/Frantss/temporal-fns"
       links={[
-        { text: 'npm', url: 'https://www.npmjs.com/package/@helpy/temporal-fns', external: true },
+        { text: 'npm', url: 'https://www.npmjs.com/package/@frantss/temporal-fns', external: true },
       ]}
     >
       {children}

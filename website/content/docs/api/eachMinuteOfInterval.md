@@ -9,7 +9,7 @@ title: 'eachMinuteOfInterval'
 Enumerate minute starts for `PlainTime`, `PlainDateTime`, or `ZonedDateTime` endpoints. Supports `step`. Floor the first value to a minute. Zoned steps use elapsed minutes and preserve both sides of a fold; clock-only values never wrap into another day.
 
 ```ts
-import { eachMinuteOfInterval } from '@helpy/temporal-fns';
+import { eachMinuteOfInterval } from '@frantss/temporal-fns';
 
 eachMinuteOfInterval({
   start: Temporal.PlainTime.from('23:57:30'),

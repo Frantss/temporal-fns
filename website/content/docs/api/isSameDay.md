@@ -9,7 +9,7 @@ title: 'isSameDay'
 Check whether two values fall on the same calendar date in the selected context.
 
 ```ts
-import { isSameDay } from '@helpy/temporal-fns';
+import { isSameDay } from '@frantss/temporal-fns';
 
 isSameDay(
   Temporal.PlainDateTime.from('2026-10-23T00:00'),

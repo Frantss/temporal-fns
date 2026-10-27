@@ -11,7 +11,7 @@ Read a valid Date's host-local year, month, date, and clock fields into a zone-f
 An invalid Date throws `RangeError`; non-Date input throws `TypeError`. The result depends on the host zone for a given epoch timestamp.
 
 ```ts
-import { fromCalendarDate } from '@helpy/temporal-fns/calendar';
+import { fromCalendarDate } from '@frantss/temporal-fns/calendar';
 
 const widget = new Date(2026, 9, 23, 14, 30, 15, 123);
 fromCalendarDate(widget).toString(); // => '2026-10-23T14:30:15.123'

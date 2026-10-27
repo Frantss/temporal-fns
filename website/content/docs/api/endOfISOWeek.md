@@ -9,7 +9,7 @@ title: 'endOfISOWeek'
 Find Sunday, or its final nanosecond, at the end of the containing ISO week.
 
 ```ts
-import { endOfISOWeek } from '@helpy/temporal-fns';
+import { endOfISOWeek } from '@frantss/temporal-fns';
 
 endOfISOWeek(Temporal.PlainDate.from('2026-10-23')).toString(); // => '2026-10-25'
 endOfISOWeek(Temporal.PlainDate.from('2025-12-31')).toString(); // => '2026-01-04'

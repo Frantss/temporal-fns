@@ -9,7 +9,7 @@ title: 'closestTo'
 Select the value at the smallest absolute distance from `target`. Target and candidates must share a supported kind, even when another candidate already matches exactly. Ties retain the first candidate.
 
 ```ts
-import { closestTo } from '@helpy/temporal-fns';
+import { closestTo } from '@frantss/temporal-fns';
 
 const target = Temporal.PlainTime.from('12:00');
 const first = Temporal.PlainTime.from('11:00');

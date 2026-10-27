@@ -9,7 +9,7 @@ title: 'tryParseDuration'
 Read human duration text with [parseDuration](./parseDuration.md)'s grammar. Return `[null, duration]` on success or `[error, null]` when parsing throws `RangeError`. Non-string arguments still throw `TypeError`.
 
 ```ts
-import { tryParseDuration } from '@helpy/temporal-fns';
+import { tryParseDuration } from '@frantss/temporal-fns';
 
 const [error, duration] = tryParseDuration('1h 30m');
 if (error === null) {

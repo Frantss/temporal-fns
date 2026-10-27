@@ -9,7 +9,7 @@ title: 'isSameWeek'
 Check whether two values belong to the same containing week, even across a year boundary. `weekStartsOn` defaults to Sunday (`0`). Week numbering options do not apply.
 
 ```ts
-import { isSameWeek } from '@helpy/temporal-fns';
+import { isSameWeek } from '@frantss/temporal-fns';
 
 const a = Temporal.PlainDate.from('2026-10-24');
 const b = Temporal.PlainDate.from('2026-10-25');

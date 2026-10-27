@@ -11,7 +11,7 @@ Use [formatDistance](./formatDistance.md)'s phrases and options with the current
 Examples below create values relative to the live clock and assume they are evaluated immediately.
 
 ```ts
-import { formatDistanceToNow } from '@helpy/temporal-fns';
+import { formatDistanceToNow } from '@frantss/temporal-fns';
 
 const future = Temporal.Now.instant().add({ minutes: 5 });
 formatDistanceToNow(future, { timeZone: 'UTC', addSuffix: true }); // => 'in 5 minutes'

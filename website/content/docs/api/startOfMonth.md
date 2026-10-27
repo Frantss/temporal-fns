@@ -9,7 +9,7 @@ title: 'startOfMonth'
 Find the first date of the containing month. `PlainYearMonth` is not accepted because it already represents a whole month.
 
 ```ts
-import { startOfMonth } from '@helpy/temporal-fns';
+import { startOfMonth } from '@frantss/temporal-fns';
 
 startOfMonth(Temporal.PlainDate.from('2024-02-29')).toString(); // => '2024-02-01'
 startOfMonth(Temporal.PlainDateTime.from('2026-10-23T14:30')).toString(); // => '2026-10-01T00:00:00'

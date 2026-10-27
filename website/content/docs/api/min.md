@@ -9,7 +9,7 @@ title: 'min'
 Select the earliest value. Equal minima retain the first original object.
 
 ```ts
-import { min } from '@helpy/temporal-fns';
+import { min } from '@frantss/temporal-fns';
 
 const early = Temporal.PlainDate.from('2026-10-22');
 const late = Temporal.PlainDate.from('2026-10-23');

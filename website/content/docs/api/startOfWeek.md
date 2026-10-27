@@ -9,7 +9,7 @@ title: 'startOfWeek'
 Find the start of the containing seven-date week. Set `weekStartsOn` to change its first weekday; this is independent of business-day weekend configuration.
 
 ```ts
-import { startOfWeek } from '@helpy/temporal-fns';
+import { startOfWeek } from '@frantss/temporal-fns';
 
 const date = Temporal.PlainDate.from('2026-10-23');
 startOfWeek(date).toString(); // => '2026-10-18'

@@ -11,7 +11,7 @@ Use [formatDistanceStrict](./formatDistanceStrict.md)'s units, rounding, and suf
 Examples assume immediate evaluation after creating each value.
 
 ```ts
-import { formatDistanceToNowStrict } from '@helpy/temporal-fns';
+import { formatDistanceToNowStrict } from '@frantss/temporal-fns';
 
 const future = Temporal.Now.instant().add({ minutes: 5 });
 formatDistanceToNowStrict(future, {

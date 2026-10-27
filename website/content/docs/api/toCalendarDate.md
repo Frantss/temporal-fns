@@ -13,7 +13,7 @@ Reject microsecond or nanosecond precision, host-local gaps or skipped dates, an
 The successful examples use ordinary October dates; they require the displayed times to exist in the host zone.
 
 ```ts
-import { toCalendarDate } from '@helpy/temporal-fns/calendar';
+import { toCalendarDate } from '@frantss/temporal-fns/calendar';
 
 const date = toCalendarDate(Temporal.PlainDate.from('2026-10-23'));
 [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours()]; // => [2026, 10, 23, 0]

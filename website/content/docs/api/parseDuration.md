@@ -11,7 +11,7 @@ Read integer human units in any order. Accepted short names are `y`, `mo`, `w`, 
 Fractions, repeated units, per-component signs, ISO duration strings, clock notation, unknown units, and integers that cannot be represented exactly as numbers throw `RangeError`. Native Duration component limits also apply.
 
 ```ts
-import { parseDuration } from '@helpy/temporal-fns';
+import { parseDuration } from '@frantss/temporal-fns';
 
 parseDuration('25h 90m').hours; // => 25
 parseDuration('25h 90m').minutes; // => 90

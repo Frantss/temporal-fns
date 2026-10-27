@@ -4,7 +4,7 @@ title: 'API reference'
 
 The API is experimental. See [installation and setup](/docs#install) before running these examples.
 
-Import functions from `@helpy/temporal-fns`, except the two [calendar widget adapters](./conventions.md#calendar-widget-adapters), which use `@helpy/temporal-fns/calendar`. Each function has its own file with examples, related APIs, and executable Gherkin behavior links. Group links describe shared input types and conventions.
+Import functions from `@frantss/temporal-fns`, except the two [calendar widget adapters](./conventions.md#calendar-widget-adapters), which use `@frantss/temporal-fns/calendar`. Each function has its own file with examples, related APIs, and executable Gherkin behavior links. Group links describe shared input types and conventions.
 
 ## Functions
 

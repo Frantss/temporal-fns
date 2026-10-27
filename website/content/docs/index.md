@@ -10,7 +10,7 @@ ESM with TypeScript declarations and tree-shakable named imports. The library us
 ## Install
 
 ```sh
-npm install @helpy/temporal-fns
+npm install @frantss/temporal-fns
 ```
 
 A global `Temporal` is required. If your runtime does not provide it, install the polyfill:
@@ -30,7 +30,7 @@ For global TypeScript declarations, see [TypeScript setup](./api/types.md#typesc
 ## Usage
 
 ```ts
-import { addBusinessDays, format, tryParse } from '@helpy/temporal-fns';
+import { addBusinessDays, format, tryParse } from '@frantss/temporal-fns';
 
 const reference = Temporal.PlainDate.from('2026-10-22');
 const nextWorkingDate = addBusinessDays(reference, 1, { weekendDays: [5, 6] });
@@ -47,4 +47,4 @@ if (error === null) {
 
 Browse [all functions](./api/index.md), [input conventions](./api/conventions.md), and [exported types and options](./api/types.md).
 
-Each function has its own page with examples, related APIs, and links to the executable Gherkin behaviors. Calendar widget adapters use the `@helpy/temporal-fns/calendar` entry point.
+Each function has its own page with examples, related APIs, and links to the executable Gherkin behaviors. Calendar widget adapters use the `@frantss/temporal-fns/calendar` entry point.

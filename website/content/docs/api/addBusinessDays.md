@@ -11,7 +11,7 @@ Move by a signed number of working dates, counting dates reached after moving an
 Date-time values retain their local clock where representable. Zoned arithmetic uses Temporal's compatible handling for gaps and folds, and entirely skipped dates do not count. A result outside the range throws.
 
 ```ts
-import { addBusinessDays } from '@helpy/temporal-fns';
+import { addBusinessDays } from '@frantss/temporal-fns';
 
 const friday = Temporal.PlainDate.from('2026-10-23');
 addBusinessDays(friday, 1).toString(); // => '2026-10-26'

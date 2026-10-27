@@ -9,7 +9,7 @@ title: 'previousDay'
 Move strictly backward to the previous occurrence of the requested weekday. Matching the input's own weekday moves back a week. Clock preservation, skipped occurrences, weekday validation, and range rules match [nextDay](./nextDay.md).
 
 ```ts
-import { previousDay } from '@helpy/temporal-fns';
+import { previousDay } from '@frantss/temporal-fns';
 
 const thursday = Temporal.PlainDate.from('2026-10-22');
 previousDay(thursday, 3).toString(); // => '2026-10-21'

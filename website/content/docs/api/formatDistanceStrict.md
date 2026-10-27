@@ -11,7 +11,7 @@ Return a rounded count with one unit and no approximation wording. `unit` accept
 `roundingMethod` defaults to `round` and also accepts `floor`, `ceil`, or `trunc`. Rounding applies to the absolute magnitude; `addSuffix` uses the actual direction even when the rounded count is zero. `addSuffix` defaults to `false` and `locale` to `en-US`.
 
 ```ts
-import { formatDistanceStrict } from '@helpy/temporal-fns';
+import { formatDistanceStrict } from '@frantss/temporal-fns';
 
 const base = Temporal.PlainDateTime.from('2026-01-01T00:00');
 formatDistanceStrict(base.add({ seconds: 3599 }), base); // => '60 minutes'

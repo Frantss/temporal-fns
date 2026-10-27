@@ -9,7 +9,7 @@ title: 'eachMonthOfInterval'
 Enumerate containing month starts for calendar values, or whole months for `PlainYearMonth` endpoints. Supports `step`. Month-only results do not acquire a day or zone, including at Temporal's lower bound. Zoned steps follow local calendar months.
 
 ```ts
-import { eachMonthOfInterval } from '@helpy/temporal-fns';
+import { eachMonthOfInterval } from '@frantss/temporal-fns';
 
 const interval = {
   start: Temporal.PlainYearMonth.from('2026-11'),

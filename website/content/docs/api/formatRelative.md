@@ -11,7 +11,7 @@ Label the calendar date relative to `base`: `yesterday`, `today`, `tomorrow`, `l
 Options are `locale` (only `en-US`) and the applicable `timeZone` context.
 
 ```ts
-import { formatRelative } from '@helpy/temporal-fns';
+import { formatRelative } from '@frantss/temporal-fns';
 
 const base = Temporal.PlainDate.from('2026-10-23');
 formatRelative(base, base); // => 'today'

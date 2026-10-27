@@ -9,7 +9,7 @@ title: 'endOfYear'
 Find December 31, or its final nanosecond, in the containing year. For `PlainYearMonth`, return December.
 
 ```ts
-import { endOfYear } from '@helpy/temporal-fns';
+import { endOfYear } from '@frantss/temporal-fns';
 
 endOfYear(Temporal.PlainDate.from('2024-02-29')).toString(); // => '2024-12-31'
 endOfYear(Temporal.PlainYearMonth.from('2026-01')).toString(); // => '2026-12'

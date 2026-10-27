@@ -9,7 +9,7 @@ title: 'startOfISOWeek'
 Find Monday at the start of the containing ISO week. This function has no options; use [startOfWeek](./startOfWeek.md) for another weekday.
 
 ```ts
-import { startOfISOWeek } from '@helpy/temporal-fns';
+import { startOfISOWeek } from '@frantss/temporal-fns';
 
 startOfISOWeek(Temporal.PlainDate.from('2026-10-25')).toString(); // => '2026-10-19'
 startOfISOWeek(Temporal.PlainDate.from('2026-01-01')).toString(); // => '2025-12-29'

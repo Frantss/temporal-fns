@@ -9,7 +9,7 @@ title: 'endOfWeek'
 Find the last date or final nanosecond of the containing week. The default Sunday start makes Saturday its last date; `weekStartsOn` changes both boundaries.
 
 ```ts
-import { endOfWeek } from '@helpy/temporal-fns';
+import { endOfWeek } from '@frantss/temporal-fns';
 
 const date = Temporal.PlainDate.from('2026-10-23');
 endOfWeek(date).toString(); // => '2026-10-24'

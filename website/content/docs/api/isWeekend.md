@@ -9,7 +9,7 @@ title: 'isWeekend'
 Check whether the value's own local date has a weekday listed in `weekendDays`. Does not accept a viewing zone; convert a zoned value first if needed.
 
 ```ts
-import { isWeekend } from '@helpy/temporal-fns';
+import { isWeekend } from '@frantss/temporal-fns';
 
 isWeekend(Temporal.PlainDate.from('2026-10-24')); // => true
 isWeekend(Temporal.PlainDate.from('2026-10-23')); // => false

@@ -11,7 +11,7 @@ Render selected fields for display or fixed text output. `locale` defaults to `e
 `Instant` requires `timeZone`. `ZonedDateTime` uses its own zone unless overridden; plain values reject zone options. `XX` and `XXX` output `Z` at zero offset and discard historical offset seconds. `SSS` displays milliseconds without rounding the input's finer precision.
 
 ```ts
-import { format } from '@helpy/temporal-fns';
+import { format } from '@frantss/temporal-fns';
 
 const date = Temporal.PlainDate.from('2026-10-23');
 format(date, 'EEEE, MMMM d, yyyy'); // => 'Friday, October 23, 2026'

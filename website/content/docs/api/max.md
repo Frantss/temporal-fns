@@ -9,7 +9,7 @@ title: 'max'
 Select the latest value. Equal maxima retain the first original object.
 
 ```ts
-import { max } from '@helpy/temporal-fns';
+import { max } from '@frantss/temporal-fns';
 
 const early = Temporal.PlainYearMonth.from('2026-10');
 const late = Temporal.PlainYearMonth.from('2027-01');
