@@ -40,7 +40,10 @@
     "test": "npm run build && vp test",
     "test:native": "npm run build && TEMPORAL_TEST_NATIVE=1 vp test",
     "test:watch": "npm run build && vp test watch",
-    "lint": "vp lint --deny-warnings"
+    "lint": "vp lint --deny-warnings",
+    "docs:dev": "npm --prefix website run dev",
+    "docs:build": "npm --prefix website run build",
+    "docs:typecheck": "npm --prefix website run typecheck"
   },
   "dependencies": {
     "temporal-spec": "^1.0.1"

@@ -47,7 +47,7 @@ if (error === null) {
 - Relative descriptions and duration labels support `en-US` only. Token text uses the host's `Intl` locale data.
 - `tryParse` and `tryParseDuration` return `[null, result]` or `[error, null]`. Invalid patterns, options, and incompatible inputs still throw.
 
-Browse the [API reference](https://github.com/Frantss/temporal-fns/blob/main/docs/api/README.md) for descriptions, examples, related APIs, and behavior specifications. Calendar-widget adapters use the `@helpy/temporal-fns/calendar` entry point.
+Browse the [API reference](https://github.com/Frantss/temporal-fns/blob/main/website/content/docs/api/index.md) for descriptions, examples, related APIs, and behavior specifications. Calendar-widget adapters use the `@helpy/temporal-fns/calendar` entry point.
 
 ## Development
 
@@ -60,3 +60,5 @@ npm run check
 ```
 
 See the [test guide](test/README.md) for the executable Gherkin specifications and native Temporal testing.
+
+Run the Fumadocs site with `npm run docs:dev` after [installing its dependencies](website/README.md). Build static files with `npm run docs:build`.

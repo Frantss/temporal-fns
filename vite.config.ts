@@ -4,7 +4,13 @@ import { cucumber } from '@lotun/vitest-cucumber';
 export default defineConfig({
   plugins: [cucumber({ import: ['test/behavior/steps.ts'] })],
   lint: {
-    ignorePatterns: ['dist/**', 'coverage/**'],
+    ignorePatterns: [
+      'dist/**',
+      'coverage/**',
+      'website/.next/**',
+      'website/.source/**',
+      'website/out/**',
+    ],
     options: { typeAware: true, typeCheck: true },
   },
   fmt: {
@@ -12,7 +18,15 @@ export default defineConfig({
     printWidth: 100,
     sortImports: false,
     sortPackageJson: false,
-    ignorePatterns: ['dist/**', 'coverage/**', 'test/features/**'],
+    ignorePatterns: [
+      'dist/**',
+      'coverage/**',
+      'test/features/**',
+      'website/.next/**',
+      'website/.source/**',
+      'website/out/**',
+      'website/next-env.d.ts',
+    ],
   },
   test: {
     environment: 'node',
