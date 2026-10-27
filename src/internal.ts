@@ -1,16 +1,8 @@
 import type { Temporal } from 'temporal-spec';
+import { clockNanoseconds, dayNanoseconds, dayNumber } from './iso.js';
 import type { CalendarValue, Formattable, OrderedValue, ZoneOptions } from './types.js';
 
-export type Kind =
-  | 'PlainDate'
-  | 'PlainDateTime'
-  | 'ZonedDateTime'
-  | 'PlainTime'
-  | 'PlainYearMonth'
-  | 'PlainMonthDay'
-  | 'Instant'
-  | 'Duration';
-const kinds: readonly Kind[] = [
+const kinds = [
   'PlainDate',
   'PlainDateTime',
   'ZonedDateTime',
@@ -19,7 +11,8 @@ const kinds: readonly Kind[] = [
   'PlainMonthDay',
   'Instant',
   'Duration',
-];
+] as const;
+export type Kind = (typeof kinds)[number];
 export const calendarKinds: readonly Kind[] = ['PlainDate', 'PlainDateTime', 'ZonedDateTime'];
 export const yearMonthKinds: readonly Kind[] = [...calendarKinds, 'PlainYearMonth'];
 export const orderedKinds: readonly Kind[] = [...yearMonthKinds, 'PlainTime', 'Instant'];
@@ -104,80 +97,53 @@ export function atDate<T extends CalendarValue>(value: T, date: Temporal.PlainDa
   if (name === 'PlainDateTime') return date.toPlainDateTime() as T;
   return date.toZonedDateTime((value as Temporal.ZonedDateTime).timeZoneId) as T;
 }
+function coordinate(value: OrderedValue, name: Kind): bigint {
+  if (name === 'Instant' || name === 'ZonedDateTime')
+    return (value as Temporal.Instant).epochNanoseconds;
+  if (name === 'PlainYearMonth')
+    return BigInt(
+      (value as Temporal.PlainYearMonth).year * 12 + (value as Temporal.PlainYearMonth).month,
+    );
+  if (name === 'PlainTime') return clockNanoseconds(value as Temporal.PlainTime);
+  const date = value as Temporal.PlainDateTime;
+  const days = BigInt(dayNumber(date.year, date.month, date.day));
+  return name === 'PlainDate' ? days : days * dayNanoseconds + clockNanoseconds(date);
+}
 export function compare(a: OrderedValue, b: OrderedValue): number {
   const name = sameKind(a, b);
   const T = temporal();
-  switch (name) {
-    case 'Instant':
-      return T.Instant.compare(a as Temporal.Instant, b as Temporal.Instant);
-    case 'ZonedDateTime':
-      return T.ZonedDateTime.compare(a as Temporal.ZonedDateTime, b as Temporal.ZonedDateTime);
-    case 'PlainDateTime':
-      return T.PlainDateTime.compare(a as Temporal.PlainDateTime, b as Temporal.PlainDateTime);
-    case 'PlainDate':
-      return T.PlainDate.compare(a as Temporal.PlainDate, b as Temporal.PlainDate);
-    case 'PlainTime':
-      return T.PlainTime.compare(a as Temporal.PlainTime, b as Temporal.PlainTime);
-    default: {
-      const left = a as Temporal.PlainYearMonth,
-        right = b as Temporal.PlainYearMonth;
-      return Math.sign(left.year - right.year || left.month - right.month);
-    }
-  }
+  if (name === 'PlainYearMonth')
+    return Math.sign(
+      (a as Temporal.PlainYearMonth).year - (b as Temporal.PlainYearMonth).year ||
+        (a as Temporal.PlainYearMonth).month - (b as Temporal.PlainYearMonth).month,
+    );
+  return (T[name] as typeof T.Instant).compare(a as Temporal.Instant, b as Temporal.Instant);
 }
 export function distance(a: OrderedValue, b: OrderedValue): bigint {
-  const name = sameKind(a, b);
-  let value: bigint;
-  if (name === 'Instant' || name === 'ZonedDateTime')
-    value = (a as Temporal.Instant).epochNanoseconds - (b as Temporal.Instant).epochNanoseconds;
-  else if (name === 'PlainYearMonth')
-    value = BigInt(
-      ((a as Temporal.PlainYearMonth).year - (b as Temporal.PlainYearMonth).year) * 12 +
-        (a as Temporal.PlainYearMonth).month -
-        (b as Temporal.PlainYearMonth).month,
-    );
-  else if (name === 'PlainDate')
-    value = BigInt((a as Temporal.PlainDate).since(b as Temporal.PlainDate).days);
-  else {
-    const clock = (item: Temporal.PlainTime | Temporal.PlainDateTime): bigint =>
-      BigInt(item.hour) * 3_600_000_000_000n +
-      BigInt(item.minute) * 60_000_000_000n +
-      BigInt(item.second) * 1_000_000_000n +
-      BigInt(item.millisecond) * 1_000_000n +
-      BigInt(item.microsecond) * 1_000n +
-      BigInt(item.nanosecond);
-    value = clock(a as Temporal.PlainTime) - clock(b as Temporal.PlainTime);
-    if (name === 'PlainDateTime')
-      value +=
-        BigInt(
-          (a as Temporal.PlainDateTime)
-            .toPlainDate()
-            .since((b as Temporal.PlainDateTime).toPlainDate()).days,
-        ) * 86_400_000_000_000n;
-  }
-  return value < 0n ? -value : value;
+  const name = sameKind(a, b),
+    delta = coordinate(a, name) - coordinate(b, name);
+  return delta < 0n ? -delta : delta;
 }
+export function named<T extends (...args: never[]) => unknown>(name: string, fn: T): T {
+  return Object.defineProperty(fn, 'name', { value: name });
+}
+type CalendarInput = CalendarValue | Temporal.PlainYearMonth | Temporal.Instant;
 export function calendarPair(
-  a: CalendarValue | Temporal.PlainYearMonth | Temporal.Instant,
+  a: CalendarInput,
   b: typeof a,
   context?: ZoneOptions,
 ): [CalendarValue | Temporal.PlainYearMonth, CalendarValue | Temporal.PlainYearMonth] {
   const name = sameKind(a, b, [...yearMonthKinds, 'Instant']);
-  if (name === 'Instant') {
+  if (name === 'Instant' || (name === 'ZonedDateTime' && context?.timeZone !== undefined)) {
     const tz = zone(context?.timeZone);
-    return [
-      (a as Temporal.Instant).toZonedDateTimeISO(tz),
-      (b as Temporal.Instant).toZonedDateTimeISO(tz),
-    ];
+    const convert = (value: CalendarInput) =>
+      name === 'Instant'
+        ? (value as Temporal.Instant).toZonedDateTimeISO(tz)
+        : (value as Temporal.ZonedDateTime).withTimeZone(tz);
+    return [convert(a), convert(b)];
   }
   if (name === 'ZonedDateTime') {
-    const left = a as Temporal.ZonedDateTime,
-      right = b as Temporal.ZonedDateTime;
-    if (context?.timeZone !== undefined) {
-      const tz = zone(context.timeZone);
-      return [left.withTimeZone(tz), right.withTimeZone(tz)];
-    }
-    if (left.timeZoneId !== right.timeZoneId)
+    if ((a as Temporal.ZonedDateTime).timeZoneId !== (b as Temporal.ZonedDateTime).timeZoneId)
       throw new RangeError('Different zones require an explicit comparison timeZone');
   } else if (context?.timeZone !== undefined)
     throw new RangeError('Plain values do not accept a timeZone');

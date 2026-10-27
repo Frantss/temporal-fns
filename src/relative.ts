@@ -1,13 +1,5 @@
 import type { Temporal } from 'temporal-spec';
-import { calendarTotal, canExtendCalendarRange } from './calendar-total.js';
-import type {
-  CalendarValue,
-  DistanceOptions,
-  StrictDistanceOptions,
-  ZoneOptions,
-  PlainOptions,
-  RequiredZoneOptions,
-} from './types.js';
+import { calendarTotal } from './calendar-total.js';
 import {
   booleanOption,
   calendarKinds,
@@ -21,9 +13,24 @@ import {
   toDate,
   zone,
 } from './internal.js';
+import type { Pair, ToNow } from './signatures.js';
+import type {
+  CalendarValue,
+  DistanceOptions,
+  StrictDistanceOptions,
+  ZoneOptions,
+} from './types.js';
 
 type RelativeValue = CalendarValue | Temporal.Instant;
 type RelativeOptions = DistanceOptions & StrictDistanceOptions;
+const units = ['second', 'minute', 'hour', 'day', 'month', 'year'] as const;
+const thresholds = [60, 3600, 86400, 2592000, 31536000, Infinity];
+const distanceKeys = (strict: boolean) => [
+  'locale',
+  'addSuffix',
+  'timeZone',
+  ...(strict ? ['unit', 'roundingMethod'] : ['includeSeconds']),
+];
 function nearRangeEdge(value: CalendarValue): boolean {
   return value.year <= -271_821 + 1 || value.year >= 275_760 - 1;
 }
@@ -55,22 +62,11 @@ function amount(
   }
   if (compare(value, base) === 0) return 0;
   try {
-    if (name === 'PlainDate') {
-      const duration = (base as Temporal.PlainDate).until(value as Temporal.PlainDate, {
-        largestUnit: 'year',
-      });
-      return duration.total({ unit, relativeTo: base as Temporal.PlainDate });
-    }
-    if (name === 'PlainDateTime') {
-      const duration = (base as Temporal.PlainDateTime).until(value as Temporal.PlainDateTime, {
-        largestUnit: 'year',
-      });
-      return duration.total({ unit, relativeTo: (base as Temporal.PlainDateTime).toPlainDate() });
-    }
-    const duration = (base as Temporal.ZonedDateTime).until(value as Temporal.ZonedDateTime, {
-      largestUnit: 'year',
+    const duration = base.until(value as never, { largestUnit: 'year' });
+    return duration.total({
+      unit,
+      relativeTo: name === 'PlainDateTime' ? (base as Temporal.PlainDateTime).toPlainDate() : base,
     });
-    return duration.total({ unit, relativeTo: base as Temporal.ZonedDateTime });
   } catch (error) {
     if (
       error instanceof RangeError &&
@@ -78,7 +74,8 @@ function amount(
       (nearRangeEdge(value) || nearRangeEdge(base))
     ) {
       try {
-        if (canExtendCalendarRange(base)) return calendarTotal(value, base, unit);
+        const total = calendarTotal(value, base, unit);
+        if (total !== undefined) return total;
       } catch (fallbackError) {
         if (!(fallbackError instanceof RangeError)) throw fallbackError;
       }
@@ -96,16 +93,10 @@ function renderDistance(
   context?: RelativeOptions,
   strict = false,
 ): string {
-  options(
-    context,
-    strict
-      ? ['locale', 'addSuffix', 'unit', 'roundingMethod', 'timeZone']
-      : ['locale', 'addSuffix', 'includeSeconds', 'timeZone'],
-  );
+  options(context, distanceKeys(strict));
   locale(context?.locale, true);
   booleanOption(context?.addSuffix, 'addSuffix');
   booleanOption(context?.includeSeconds, 'includeSeconds');
-  const units = ['second', 'minute', 'hour', 'day', 'month', 'year'] as const;
   if (context?.unit !== undefined && !units.includes(context.unit))
     throw new RangeError('Invalid distance unit');
   if (
@@ -118,34 +109,18 @@ function renderDistance(
     direction = compare(a, b);
   let text: string;
   if (strict) {
-    const unit =
-      context?.unit ??
-      (seconds < 60
-        ? 'second'
-        : seconds < 3600
-          ? 'minute'
-          : seconds < 86400
-            ? 'hour'
-            : seconds < 2592000
-              ? 'day'
-              : seconds < 31536000
-                ? 'month'
-                : 'year');
+    const unit = context?.unit ?? units[thresholds.findIndex((limit) => seconds < limit)]!;
     const count = Math[context?.roundingMethod ?? 'round'](Math.abs(amount(a, b, unit)));
     text = label(count, unit);
   } else if (context?.includeSeconds && seconds < 90) {
-    text =
-      seconds < 5
-        ? 'less than 5 seconds'
-        : seconds < 10
-          ? 'less than 10 seconds'
-          : seconds < 20
-            ? 'less than 20 seconds'
-            : seconds < 40
-              ? 'half a minute'
-              : seconds < 60
-                ? 'less than a minute'
-                : '1 minute';
+    text = [
+      'less than 5 seconds',
+      'less than 10 seconds',
+      'less than 20 seconds',
+      'half a minute',
+      'less than a minute',
+      '1 minute',
+    ][[5, 10, 20, 40, 60, 90].findIndex((limit) => seconds < limit)]!;
   } else if (seconds < 30) text = 'less than a minute';
   else if (seconds < 90) text = '1 minute';
   else if (seconds < 2700) text = label(Math.round(seconds / 60), 'minute');
@@ -160,60 +135,11 @@ function renderDistance(
   else text = 'about ' + label(Math.max(1, Math.round(Math.abs(amount(a, b, 'year')))), 'year');
   return suffixed(text, direction, context?.addSuffix);
 }
-export function formatDistance(
-  value: Temporal.PlainDate,
-  baseValue: Temporal.PlainDate,
-  context?: DistanceOptions & PlainOptions,
-): string;
-export function formatDistance(
-  value: Temporal.PlainDateTime,
-  baseValue: Temporal.PlainDateTime,
-  context?: DistanceOptions & PlainOptions,
-): string;
-export function formatDistance(
-  value: Temporal.ZonedDateTime,
-  baseValue: Temporal.ZonedDateTime,
-  context?: DistanceOptions & ZoneOptions,
-): string;
-export function formatDistance(
-  value: Temporal.Instant,
-  baseValue: Temporal.Instant,
-  context: DistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistance(
-  value: RelativeValue,
-  baseValue: RelativeValue,
-  context?: DistanceOptions,
-): string {
-  return renderDistance(value, baseValue, context, false);
-}
-export function formatDistanceStrict(
-  value: Temporal.PlainDate,
-  baseValue: Temporal.PlainDate,
-  context?: StrictDistanceOptions & PlainOptions,
-): string;
-export function formatDistanceStrict(
-  value: Temporal.PlainDateTime,
-  baseValue: Temporal.PlainDateTime,
-  context?: StrictDistanceOptions & PlainOptions,
-): string;
-export function formatDistanceStrict(
-  value: Temporal.ZonedDateTime,
-  baseValue: Temporal.ZonedDateTime,
-  context?: StrictDistanceOptions & ZoneOptions,
-): string;
-export function formatDistanceStrict(
-  value: Temporal.Instant,
-  baseValue: Temporal.Instant,
-  context: StrictDistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceStrict(
-  value: RelativeValue,
-  baseValue: RelativeValue,
-  context?: StrictDistanceOptions,
-): string {
-  return renderDistance(value, baseValue, context, true);
-}
+
+export const formatDistance: Pair<DistanceOptions, string> = (value, base, context) =>
+  renderDistance(value, base, context);
+export const formatDistanceStrict: Pair<StrictDistanceOptions, string> = (value, base, context) =>
+  renderDistance(value, base, context, true);
 
 function current(value: RelativeValue, context?: ZoneOptions): [RelativeValue, ZoneOptions] {
   const name = kind(value, [...calendarKinds, 'Instant']);
@@ -230,98 +156,28 @@ function current(value: RelativeValue, context?: ZoneOptions): [RelativeValue, Z
   if (name === 'ZonedDateTime') return [now, { timeZone: tz }];
   return [name === 'PlainDate' ? now.toPlainDate() : now.toPlainDateTime(), {}];
 }
-export function formatDistanceToNow(
-  value: Temporal.PlainDate,
-  context: DistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNow(
-  value: Temporal.PlainDateTime,
-  context: DistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNow(
-  value: Temporal.ZonedDateTime,
-  context?: DistanceOptions & ZoneOptions,
-): string;
-export function formatDistanceToNow(
-  value: Temporal.Instant,
-  context: DistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNow(value: RelativeValue, context?: DistanceOptions): string {
-  options(context, ['locale', 'addSuffix', 'includeSeconds', 'timeZone']);
-  const [now, normalized] = current(value, context);
-  return renderDistance(
-    value,
-    now,
-    {
-      locale: context?.locale,
-      addSuffix: context?.addSuffix,
-      includeSeconds: context?.includeSeconds,
-      ...normalized,
-    },
-    false,
-  );
-}
-export function formatDistanceToNowStrict(
-  value: Temporal.PlainDate,
-  context: StrictDistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNowStrict(
-  value: Temporal.PlainDateTime,
-  context: StrictDistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNowStrict(
-  value: Temporal.ZonedDateTime,
-  context?: StrictDistanceOptions & ZoneOptions,
-): string;
-export function formatDistanceToNowStrict(
-  value: Temporal.Instant,
-  context: StrictDistanceOptions & RequiredZoneOptions,
-): string;
-export function formatDistanceToNowStrict(
-  value: RelativeValue,
-  context?: StrictDistanceOptions,
-): string {
-  options(context, ['locale', 'addSuffix', 'unit', 'roundingMethod', 'timeZone']);
-  const [now, normalized] = current(value, context);
-  return renderDistance(
-    value,
-    now,
-    {
-      locale: context?.locale,
-      addSuffix: context?.addSuffix,
-      unit: context?.unit,
-      roundingMethod: context?.roundingMethod,
-      ...normalized,
-    },
-    true,
-  );
-}
-export function formatRelative(
-  value: Temporal.PlainDate,
-  baseValue: Temporal.PlainDate,
-  context?: { locale?: string } & PlainOptions,
-): string;
-export function formatRelative(
-  value: Temporal.PlainDateTime,
-  baseValue: Temporal.PlainDateTime,
-  context?: { locale?: string } & PlainOptions,
-): string;
-export function formatRelative(
-  value: Temporal.ZonedDateTime,
-  baseValue: Temporal.ZonedDateTime,
-  context?: { locale?: string } & ZoneOptions,
-): string;
-export function formatRelative(
-  value: Temporal.Instant,
-  baseValue: Temporal.Instant,
-  context: { locale?: string } & RequiredZoneOptions,
-): string;
 
-export function formatRelative(
+function toNow(
   value: RelativeValue,
-  baseValue: RelativeValue,
-  context?: ZoneOptions & { locale?: string },
+  context: RelativeOptions | undefined,
+  strict: boolean,
 ): string {
+  const keys = distanceKeys(strict);
+  options(context, keys);
+  const [now, normalized] = current(value, context);
+  const rest = Object.fromEntries(
+    keys
+      .filter((key) => key !== 'timeZone')
+      .map((key) => [key, context?.[key as keyof RelativeOptions]]),
+  );
+  return renderDistance(value, now, { ...rest, ...normalized }, strict);
+}
+export const formatDistanceToNow: ToNow<DistanceOptions> = (value, context) =>
+  toNow(value, context, false);
+export const formatDistanceToNowStrict: ToNow<StrictDistanceOptions> = (value, context) =>
+  toNow(value, context, true);
+
+export const formatRelative: Pair<{ locale?: string }, string> = (value, baseValue, context) => {
   options(context, ['locale', 'timeZone']);
   locale(context?.locale, true);
   const [a, b] = prepare(value, baseValue, context),
@@ -344,4 +200,4 @@ export function formatRelative(
         .toPlainTime()
         .toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
   return text;
-}
+};
