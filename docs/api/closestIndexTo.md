@@ -23,4 +23,4 @@ closestIndexTo(target, []); // => undefined
 
 Related: [closestTo](closestTo.md), [min](min.md), [max](max.md).
 
-Behaviors: [SEL-002: Closest selection uses the first occurrence in a distance tie](../../test/features/collections.feature#L23); [SEL-003: Empty collections return undefined](../../test/features/collections.feature#L41); [SEL-008: Month distance is measured in whole calendar months](../../test/features/collections.feature#L89); [SEL-010: Mixed kinds are rejected throughout a collection](../../test/features/collections.feature#L103).
+Behaviors: [SEL-002: Closest selection uses the first occurrence in a distance tie](../../test/features/collections.feature#L23); [SEL-003: Empty collections return undefined](../../test/features/collections.feature#L41); [SEL-010: Mixed kinds are rejected throughout a collection](../../test/features/collections.feature#L103); [SEL-006: Closest exact instants retain nanosecond differences](../../test/features/collections.feature#L73).

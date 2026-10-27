@@ -4,7 +4,7 @@
 
 `formatRelative(value, base, options?) → string`
 
-Label the calendar date relative to `base`: `yesterday`, `today`, `tomorrow`, `last <weekday>` for −6 through −2 days, and `<weekday>` for +2 through +6 days. Beyond that window, render `MM/dd/yyyy`. Date-time, zoned, and instant inputs append `at` and a host `en-US` 12-hour clock; date-only inputs do not.
+Label the calendar date relative to `base`: `yesterday`, `today`, `tomorrow`, `last <weekday>` for −6 through −2 days, and `<weekday>` for +2 through +6 days. Beyond that window, render `MM/dd/yyyy`. Date-time, zoned, and instant inputs append `at` and a host `en-US` 12-hour clock; date-only inputs do not. Clock text and spacing follow the host's `Intl` data.
 
 Options are `locale` (only `en-US`) and the applicable `timeZone` context.
 
@@ -17,7 +17,12 @@ formatRelative(base.subtract({ days: 2 }), base); // => 'last Wednesday'
 formatRelative(base.add({ days: 2 }), base); // => 'Sunday'
 formatRelative(base.add({ days: 7 }), base); // => '10/30/2026'
 const clock = Temporal.PlainDateTime.from('2026-10-23T14:30');
-formatRelative(clock.add({ days: 1 }), clock); // => 'tomorrow at 2:30 PM'
+const clockText = clock.toPlainTime().toLocaleString('en-US', {
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+});
+formatRelative(clock.add({ days: 1 }), clock) === 'tomorrow at ' + clockText; // => true
 ```
 
 Related: [format](format.md), [formatDistance](formatDistance.md), [formatDistanceStrict](formatDistanceStrict.md).

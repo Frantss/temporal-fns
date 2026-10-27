@@ -6,7 +6,7 @@
 
 Render nonzero components, from years through nanoseconds by default. `format` selects a nonempty, distinct list of plural unit names and controls their order. `zero: true` includes zero components; `delimiter` defaults to a space. `locale` defaults to `en-US`.
 
-A negative duration gets one leading minus sign. If no selected component is nonzero, output is `0` followed by the last selected plural unit; the default is `0 nanoseconds`.
+A negative duration gets one leading minus sign. When `zero` is omitted or `false` and no selected component is nonzero, output is `0` followed by the last selected plural unit; the default is `0 nanoseconds`. With `zero: true`, every selected component appears, including when all are zero.
 
 ```ts
 import { formatDuration } from '@helpy/temporal-fns';
@@ -17,6 +17,11 @@ formatDuration(duration, { format: ['minutes', 'hours'], delimiter: ', ' }); // 
 formatDuration(duration, { format: ['days', 'hours'], zero: true }); // => '0 days 25 hours'
 formatDuration(Temporal.Duration.from('-P1DT2H')); // => '-1 day 2 hours'
 formatDuration(Temporal.Duration.from('PT0S')); // => '0 nanoseconds'
+formatDuration(Temporal.Duration.from('PT0S'), { format: ['hours', 'minutes'] }); // => '0 minutes'
+formatDuration(Temporal.Duration.from('PT0S'), {
+  format: ['hours', 'minutes'],
+  zero: true,
+}); // => '0 hours 0 minutes'
 ```
 
 Related: [parseDuration](parseDuration.md), [tryParseDuration](tryParseDuration.md), [formatDistanceStrict](formatDistanceStrict.md).

@@ -75,7 +75,7 @@ Weekday numbers are `0` (Sunday) through `6` (Saturday), unlike Temporal's `dayO
 
 ## Collection selection
 
-Accept homogeneous readonly arrays of `PlainDate`, `PlainDateTime`, `ZonedDateTime`, `PlainTime`, `PlainYearMonth`, or `Instant`. Empty arrays return `undefined`. Selection returns an original object, and ties retain the first occurrence. No function sorts or mutates the array.
+Accept homogeneous readonly arrays of `PlainDate`, `PlainDateTime`, `ZonedDateTime`, `PlainTime`, `PlainYearMonth`, or `Instant`. Empty arrays return `undefined`. `min`, `max`, and `closestTo` return an original object; `closestIndexTo` returns its zero-based index. Ties retain the first occurrence. No function sorts or mutates the array.
 
 Zoned values are ordered by exact instant and may have different zones. Plain date-time distance uses wall time; date distance uses days; year-month distance uses whole months without hidden reference days. Clock-only distance is linear and does not wrap at midnight. See the [shared contracts](README.md#shared-contracts).
 

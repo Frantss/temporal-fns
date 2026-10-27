@@ -18,4 +18,4 @@ max([]); // => undefined
 
 Related: [min](min.md), [closestTo](closestTo.md), [clamp](clamp.md).
 
-Behaviors: [SEL-001: Minima and maxima preserve the selected object](../../test/features/collections.feature#L5); [SEL-003: Empty collections return undefined](../../test/features/collections.feature#L41); [SEL-004: Equal extrema keep the first occurrence](../../test/features/collections.feature#L53); [SEL-012: Full-range plain date-time selection does not require duration balancing](../../test/features/collections.feature#L127).
+Behaviors: [SEL-001: Minima and maxima preserve the selected object](../../test/features/collections.feature#L5); [SEL-003: Empty collections return undefined](../../test/features/collections.feature#L41); [SEL-004: Equal extrema keep the first occurrence](../../test/features/collections.feature#L53); [SEL-005: Exact time, rather than displayed local order, orders zoned values](../../test/features/collections.feature#L63).

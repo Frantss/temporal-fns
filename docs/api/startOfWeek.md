@@ -17,4 +17,4 @@ startOfWeek(Temporal.PlainDateTime.from('2026-10-23T14:30')).toString(); // => '
 
 Related: [endOfWeek](endOfWeek.md), [startOfISOWeek](startOfISOWeek.md), [eachWeekOfInterval](eachWeekOfInterval.md).
 
-Behaviors: [BND-001: Plain date boundaries return complete dates](../../test/features/boundaries.feature#L5); [BND-002: Plain date-time boundaries retain nanosecond endpoint precision](../../test/features/boundaries.feature#L23); [BND-003: Week configuration changes starts and ends together](../../test/features/boundaries.feature#L42); [BND-013: Unavailable required boundaries are rejected rather than clipped](../../test/features/boundaries.feature#L155).
+Behaviors: [BND-001: Plain date boundaries return complete dates](../../test/features/boundaries.feature#L5); [BND-002: Plain date-time boundaries retain nanosecond endpoint precision](../../test/features/boundaries.feature#L23); [BND-003: Week configuration changes starts and ends together](../../test/features/boundaries.feature#L42); [BND-008: A skipped midnight produces the earliest valid start](../../test/features/boundaries.feature#L109).
