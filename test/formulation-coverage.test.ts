@@ -6,7 +6,7 @@ import { IdGenerator } from '@cucumber/messages';
 it('retains all 247 scenarios, 1621 expanded cases, and 560 API/type combinations', () => {
   const id = IdGenerator.incrementing();
   const parser = new Parser(new AstBuilder(id), new GherkinClassicTokenMatcher());
-  const folder = new URL('../docs/behavior/features/', import.meta.url);
+  const folder = new URL('./features/', import.meta.url);
   const files = readdirSync(folder).filter((f) => f.endsWith('.feature'));
   const documents = files.map((file) => ({
     file,

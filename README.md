@@ -32,7 +32,7 @@ if (error === null) {
 - Relative descriptions and duration labels support `en-US` only. Token text uses the host's `Intl` locale data.
 - `tryParse` and `tryParseDuration` return `[null, result]` or `[error, null]`. Invalid patterns, options, and incompatible inputs still throw.
 
-See the [API reference](docs/api-proposal.md) for supported types, options, and behavior. Calendar-widget adapters use the `@frantss/temporal-fns/calendar` entry point.
+Browse the [public exports](src/index.ts) for the current API. Calendar-widget adapters use the `@frantss/temporal-fns/calendar` entry point.
 
 ## Development
 

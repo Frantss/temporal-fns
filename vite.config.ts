@@ -12,7 +12,7 @@ export default defineConfig({
     printWidth: 100,
     sortImports: false,
     sortPackageJson: false,
-    ignorePatterns: ['dist/**', 'coverage/**', 'docs/behavior/**'],
+    ignorePatterns: ['dist/**', 'coverage/**', 'test/features/**'],
   },
   test: {
     environment: 'node',
@@ -20,10 +20,10 @@ export default defineConfig({
     pool: 'forks',
     restoreMocks: true,
     testTimeout: 30000,
-    include: ['test/**/*.test.ts', 'docs/behavior/features/*.feature'],
+    include: ['test/**/*.test.ts', 'test/features/*.feature'],
     setupFiles: ['test/setup.ts'],
     sequence: { concurrent: false },
-    forceRerunTriggers: ['**/package.json', '**/vite.config.*', 'docs/behavior/**/*.feature'],
+    forceRerunTriggers: ['**/package.json', '**/vite.config.*', 'test/features/**/*.feature'],
     typecheck: {
       enabled: true,
       tsconfig: 'tsconfig.test.json',

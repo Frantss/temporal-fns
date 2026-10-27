@@ -104,10 +104,9 @@ registerScenario<ExampleRows['CON-003']>('CON-003', () => {
       When('a caller imports the root entry point', () => {
         exported = Object.keys(root);
         rootNames = [
-          ...readFileSync(
-            new URL('../../docs/behavior/coverage.md', import.meta.url),
-            'utf8',
-          ).matchAll(/^\| `(\w+)`\s*\|/gm),
+          ...readFileSync(new URL('./coverage.md', import.meta.url), 'utf8').matchAll(
+            /^\| `(\w+)`\s*\|/gm,
+          ),
         ].map((m) => m[1]!);
       }),
       Then('it exposes exactly the 54 root functions listed in coverage.md', () => {
