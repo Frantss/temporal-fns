@@ -56,4 +56,4 @@ See [exported types and options](./types.md) for value unions, result tuples, in
 
 ## Behavior specifications
 
-The links on each function lead to the source Gherkin scenarios under [test/features](https://github.com/Frantss/temporal-fns/tree/main/test/features). Stable case IDs identify each rule; scenario outlines contain the full set of examples. See the [test guide](https://github.com/Frantss/temporal-fns/blob/main/test/README.md) to run them.
+The links on each function lead to the source Gherkin scenarios under [test/features](https://github.com/Frantss/temporal-fns/tree/main/test/features). Stable case IDs identify each rule; scenario outlines contain the full set of examples. See the [development instructions](https://github.com/Frantss/temporal-fns/blob/main/README.md#development) to run them.

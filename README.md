@@ -2,6 +2,8 @@
 
 Date-fns-style utilities for the Temporal API.
 
+Read the [documentation](https://temporal-fns.frantss.uy).
+
 > **Experimental.** The API and behavior may change.
 
 ESM with TypeScript declarations and tree-shakable named imports.
@@ -47,7 +49,7 @@ if (error === null) {
 - Relative descriptions and duration labels support `en-US` only. Token text uses the host's `Intl` locale data.
 - `tryParse` and `tryParseDuration` return `[null, result]` or `[error, null]`. Invalid patterns, options, and incompatible inputs still throw.
 
-Browse the [API reference](https://github.com/Frantss/temporal-fns/blob/main/website/content/docs/api/index.md) for descriptions, examples, related APIs, and behavior specifications. Calendar-widget adapters use the `@frantss/temporal-fns/calendar` entry point.
+Browse the [API reference](https://temporal-fns.frantss.uy/docs/api/) for descriptions, examples, related APIs, and behavior specifications. Calendar-widget adapters use the `@frantss/temporal-fns/calendar` entry point.
 
 ## Development
 
@@ -59,6 +61,6 @@ npm run build
 npm run check
 ```
 
-See the [test guide](test/README.md) for the executable Gherkin specifications and native Temporal testing.
+Run the executable [Gherkin specifications](test/features/) with `npm test`. Tests use the Temporal polyfill by default; use `npm run test:native` on a runtime with native Temporal.
 
-Run the Fumadocs site with `npm run docs:dev`. Build static files with `npm run docs:build`. See the [site guide](website/README.md) and the reusable [@frantss/fumadocs-theme package](https://github.com/Frantss/fumadocs-theme).
+Run the Fumadocs site with `npm run docs:dev`. Build static files with `npm run docs:build`. The site uses the reusable [@frantss/fumadocs-theme package](https://github.com/Frantss/fumadocs-theme).
