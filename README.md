@@ -14,12 +14,21 @@ The full API, including `/calendar`, bundles to approximately **23.5 kB minified
 npm install @helpy/temporal-fns
 ```
 
-## Usage
+Requires a global `Temporal`. If your runtime does not provide it, install the polyfill:
 
-Requires a global `Temporal`. If your runtime lacks it, install `temporal-polyfill` separately.
+```sh
+npm install temporal-polyfill
+```
+
+Load it once in your application entry point, before using the library:
 
 ```ts
-import 'temporal-polyfill/global'; // Only needed when Temporal is unavailable globally.
+import 'temporal-polyfill/global';
+```
+
+## Usage
+
+```ts
 import { addBusinessDays, format, tryParse } from '@helpy/temporal-fns';
 
 const reference = Temporal.PlainDate.from('2026-10-22');
