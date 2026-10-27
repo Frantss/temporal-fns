@@ -1,19 +1,7 @@
 import type { Temporal } from 'temporal-spec';
-import type { DurationFormatOptions, DurationUnit, TryResult } from './types.js';
 import { booleanOption, kind, locale, options, temporal } from './internal.js';
+import type { DurationFormatOptions, DurationUnit, TryResult } from './types.js';
 
-const units: readonly DurationUnit[] = [
-  'years',
-  'months',
-  'weeks',
-  'days',
-  'hours',
-  'minutes',
-  'seconds',
-  'milliseconds',
-  'microseconds',
-  'nanoseconds',
-];
 const aliases: Record<string, DurationUnit> = {
   y: 'years',
   mo: 'months',
@@ -26,6 +14,7 @@ const aliases: Record<string, DurationUnit> = {
   us: 'microseconds',
   ns: 'nanoseconds',
 };
+const units = Object.values(aliases);
 for (const unit of units) {
   aliases[unit] = unit;
   aliases[unit.slice(0, -1)] = unit;
